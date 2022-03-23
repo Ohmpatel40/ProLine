@@ -1,0 +1,9 @@
+$orderQ = "select items.pname, items.price, count(orderdetails.orderid) from orderdetails join items on orderdetails.orderid=items.id group by items.id;";
+    $queryOrder = mysqli_query($con,$orderQ);
+    $total = 0;
+    $gtotal = 0;
+    while($orderRes = mysqli_fetch_array($queryOrder))
+    {
+        $total = $orderRes['price'] * $orderRes['count(orderdetails.orderid)'];
+        $gtotal = $gtotal + $total;
+    }
